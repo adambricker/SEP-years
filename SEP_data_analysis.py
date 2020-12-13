@@ -15,15 +15,16 @@ outFile2 = 'SEP_data_full.txt'
 #SD; 1st Quartile; 3rd Quartile; Min; Max; filter min; filter max
 
 #get URL list
-URLlist = []
-with open(UrlFile, 'r') as f:
-    line = f.readline()
-    while line != '':
-        line = line.replace('\n', '')
-        URLlist.append(line)
-        line = f.readline()
+#URLlist = []
+#with open(UrlFile, 'r') as f:
+#    line = f.readline()
+#    while line != '':
+#        line = line.replace('\n', '')
+#        URLlist.append(line)
+#        line = f.readline()
 
-#URLlist = ['https://plato.stanford.edu/entries/logic-classical/']
+#for testing new code:
+URLlist = ['https://plato.stanford.edu/entries/delmedigo/']
 
 counter = 1
 for URL in URLlist:
@@ -31,7 +32,7 @@ for URL in URLlist:
     counter += 1
 
     #get the data
-    yearList = extractYears(URL)
+    yearList, title = extractYears(URL)
     yearList.sort()
 
     ##all the stats
@@ -60,15 +61,17 @@ for URL in URLlist:
     QT1 = int(round(quantile(yearList, .25)))
     #3rd Quartile
     QT3 = int(round(quantile(yearList, .75)))
+    #Inter quartile range
+    IQR = QT3 - QT1
     #Min
     MIN = yearList[0]
     #Max
     MAX = yearList[-1]
 
     #prepare out text (summary)
-    outText = URL + ';' + str(count) + ';' + str(MEAN) + ';' + str(MED) + ';'
-    outText += str(MODE) + ';' + str(modeF) + ';' + str(SD) + ';'
-    outText += str(QT1) + ';' + str(QT3) + ';'
+    outText = URL + ';' + title + ';' + str(count) + ';' + str(MEAN) + ';'
+    outText += str(MED) + ';' + str(MODE) + ';' + str(modeF) + ';'
+    outText += str(SD) + ';' + str(QT1) + ';' + str(QT3) + ';' + str(IQR) + ';'
     outText += str(MIN) + ';' + str(MAX) + ';' + str(year1) + ';' + str(year2)
     with open(outFile, 'a') as f2:
         f2.write(outText)
