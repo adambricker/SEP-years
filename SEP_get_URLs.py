@@ -1,3 +1,6 @@
+#This is what I wrote to get all the SEP URLs and write them into a .txt file.
+#It's rough because it worked right away, and I didn't need it after that.
+
 import requests
 
 link = 'https://plato.stanford.edu/contents.html'
@@ -15,14 +18,7 @@ text = file.text
 print(text.count('<li> <a href="'))
 
 
-#ok, so to make this happen, you're going to need to make something that looks
-#through snippets of this string to find the bit of code that precedes the
-#links you're looking for, then once it finds it pulls out the bit of URL
-#from behind it, adds the rest, and saves it to a CSV or something
 
-
-#maybe the process is: (1) get indexs of each of these occurances, (2) go back
-#and check for the right URL at each of them, (3) output what you find
 
 l =[]
 with open(outFile, "w") as f:

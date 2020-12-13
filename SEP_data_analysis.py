@@ -1,4 +1,6 @@
-#Description!
+#This scrapes every "year" from every SEP page in the UrlFile you specify, and
+#then outputs some basic descriptive stats, along with the full data it scraped,
+#which isn't really formatted that conveniently.
 from SEP_dates import *
 
 from statistics import mean, median, mode, stdev
@@ -10,21 +12,21 @@ UrlFile = 'SEP_URLs.txt'
 outFile = 'SEP_data_summary.txt'
 outFile2 = 'SEP_data_full.txt'
 
-#outFile is a CSV (seperated with ;)
-#Structure of outFile: link;year count; mean; median; mode; mode frequency;
-#SD; 1st Quartile; 3rd Quartile; Min; Max; filter min; filter max
+#outFile is a csv-like .txt (seperated with ;)
+#Structure of outFile: link;title;year count; mean; median; mode; mode frequency;
+#SD; 1st Quartile; 3rd Quartile;IQR; Min; Max; filter min; filter max
 
 #get URL list
-#URLlist = []
-#with open(UrlFile, 'r') as f:
-#    line = f.readline()
-#    while line != '':
-#        line = line.replace('\n', '')
-#        URLlist.append(line)
-#        line = f.readline()
+URLlist = []
+with open(UrlFile, 'r') as f:
+    line = f.readline()
+    while line != '':
+        line = line.replace('\n', '')
+        URLlist.append(line)
+        line = f.readline()
 
 #for testing new code:
-URLlist = ['https://plato.stanford.edu/entries/delmedigo/']
+#URLlist = ['https://plato.stanford.edu/entries/delmedigo/']
 
 counter = 1
 for URL in URLlist:
